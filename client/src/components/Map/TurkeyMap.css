@@ -1,0 +1,250 @@
+.map-page {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    #4b5320 0%,
+    #4b5320 10%,
+    transparent 10%,
+    transparent 50%
+  );
+  background-size: 20px 20px;
+  opacity: 0.03;
+  animation: backgroundMove 20s linear infinite;
+}
+
+.map-header {
+  width: 100%;
+  margin: 0;
+  padding: 1.5rem 2rem;
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.map-title {
+  color: #4b5320;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(75, 83, 32, 0.3);
+}
+
+.map-container {
+  flex: 1;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: #111;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+.turkey-map {
+  width: 90%;
+  max-width: 1200px;
+  height: 70vh;
+  margin: 2rem 0;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.turkey-map svg {
+  width: 100%;
+  height: 100%;
+}
+
+.turkey-map svg path,
+.turkey-map svg circle {
+  fill: rgba(255, 255, 255, 0.1);
+  stroke: #4b5320;
+  stroke-width: 0.5;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.turkey-map svg path:hover,
+.turkey-map svg circle:hover {
+  fill: rgba(75, 83, 32, 0.5);
+  filter: brightness(1.2);
+  transform: scale(1.02);
+  transform-origin: center;
+}
+
+.turkey-map svg path.selected,
+.turkey-map svg circle.selected {
+  fill: #4b5320 !important;
+  filter: brightness(1.2);
+  transform: scale(1.02);
+  transform-origin: center;
+}
+
+.selected-city-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.selected-city {
+  padding: 1.5rem 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.selected-city p {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.continue-button {
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: #4b5320;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(75, 83, 32, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.continue-button:hover {
+  background: #3a4119;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(75, 83, 32, 0.4);
+}
+
+.continue-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(75, 83, 32, 0.3);
+}
+
+h1 {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+h2 {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  font-weight: normal;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  pointer-events: none;
+  z-index: 1000;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(75, 83, 32, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+@keyframes backgroundMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (max-width: 1200px) {
+  .turkey-map {
+    width: 95%;
+    height: 60vh;
+  }
+}
+
+@media (max-width: 900px) {
+  .turkey-map {
+    height: 50vh;
+  }
+  
+  .map-header {
+    padding: 1rem;
+  }
+  
+  .map-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .turkey-map {
+    height: 40vh;
+    padding: 1rem;
+  }
+  
+  .selected-city {
+    padding: 1rem 2rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1rem;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+} 
