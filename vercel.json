@@ -8,7 +8,7 @@
     },
     {
       "src": "client/package.json",
-      "use": "@vercel/node",
+      "use": "@vercel/static-build",
       "config": {
         "buildCommand": "cd client && npm install && npm run build",
         "outputDirectory": "client/build"
@@ -18,10 +18,19 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "client/rota-backend/server.py"
+      "dest": "/client/rota-backend/server.py"
     },
     {
-      "handle": "filesystem"
+      "src": "/static/(.*)",
+      "dest": "/client/build/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/client/build/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/client/build/manifest.json"
     },
     {
       "src": "/(.*)",
